@@ -19,6 +19,7 @@
   "homepage": "https://github.com/ovitorvalente/qck-link-backend#readme",
   "dependencies": {
     "fastify": "^5.3.3",
+    "fastify-type-provider-zod": "^4.0.2",
     "nanoid": "^5.1.5",
     "zod": "^3.24.4"
   }
