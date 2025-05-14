@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx --watch src/server.ts"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.15.17",
+    "prisma": "^6.7.0",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   }
