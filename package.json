@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/ovitorvalente/qck-link-backend/issues"
   },
-  "homepage": "https://github.com/ovitorvalente/qck-link-backend#readme"
+  "homepage": "https://github.com/ovitorvalente/qck-link-backend#readme",
+  "dependencies": {
+    "fastify": "^5.3.3"
+  }
 }
