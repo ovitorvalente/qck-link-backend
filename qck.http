@@ -1,0 +1,10 @@
+### Criar link encurtado
+POST http://localhost:3333/shorten
+Content-Type: application/json
+
+{
+  "originalUrl": "https://grupovelus.com/"
+}
+
+### Redirecionar
+GET http://localhost:3333/4O7sox
