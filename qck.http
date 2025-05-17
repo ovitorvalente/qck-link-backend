@@ -3,8 +3,9 @@ POST http://localhost:3333/shorten
 Content-Type: application/json
 
 {
-  "originalUrl": "https://grupovelus.com/"
+  "originalUrl": "https://grupovelus.com/",
+  "isEncrypted": false
 }
 
 ### Redirecionar
-GET http://localhost:3333/4O7sox
+GET http://localhost:3333/OVCxsW
