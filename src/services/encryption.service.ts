@@ -15,17 +15,9 @@ export function Encrypt(text: string) {
   };
 }
 
-export function Decrypt(data: {
-  content: string;
-  iv: string;
-  key: string;
-}): string {
+export function Decrypt(data: { content: string; iv: string }): string {
   const iv = Buffer.from(data.iv, "hex");
-  const decipher = crypto.createDecipheriv(
-    algorithm,
-    Buffer.from(data.key, "hex"),
-    iv
-  );
+  const decipher = crypto.createDecipheriv(algorithm, secretKey, iv);
 
   const decrypted = Buffer.concat([
     decipher.update(Buffer.from(data.content, "hex")),
