@@ -20,11 +20,13 @@ model User {
 
 model Link {
   ide String @id @default(uuid())
+  userIde String?
   id Int @unique @default(autoincrement())
   code String @unique
   originalUrl String
+  iv String?
+  isEncrypted Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userIde String?
   user User? @relation(fields: [userIde], references: [ide], onDelete: Cascade)
 }
