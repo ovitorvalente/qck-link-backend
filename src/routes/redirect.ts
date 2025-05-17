@@ -1,5 +1,6 @@
 import { FastifyInstance } from "fastify";
-import { findOriginalUrl } from "../services/url.service";
+import { findUrl } from "../services/url.service";
+import { Decrypt } from "../services/encryption.service";
 
 export async function RedirectRoute(app: FastifyInstance) {
   app.get(
@@ -11,14 +12,22 @@ export async function RedirectRoute(app: FastifyInstance) {
       },
     },
     async (request, reply) => {
-      const { code } = request.params as { code: string };
-      const link = await findOriginalUrl(code);
+      const { code } = request.params as {
+        code: string;
+      };
+      const link = await findUrl(code);
 
       if (!link) {
         return reply.status(404).send({ error: `Link not found` });
       }
 
-      reply.redirect(link.originalUrl);
+      let originalUrl = link.originalUrl;
+
+      if (link.isEncrypted && link.iv) {
+        originalUrl = Decrypt({ content: link.originalUrl, iv: link.iv });
+      }
+
+      reply.redirect(originalUrl);
     }
   );
 }
