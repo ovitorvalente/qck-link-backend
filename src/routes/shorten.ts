@@ -1,6 +1,7 @@
 import z from "zod";
 import { createShortUrl } from "../services/url.service";
 import { FastifyTypeInstance } from "../types";
+import { Encrypt } from "../services/encryption.service";
 
 export async function ShortenRoute(app: FastifyTypeInstance) {
   app.post(
@@ -11,12 +12,23 @@ export async function ShortenRoute(app: FastifyTypeInstance) {
         tags: ["Link"],
         body: z.object({
           originalUrl: z.string().url(),
+          isEncrypted: z.boolean(),
         }),
       },
     },
     async (request, reply) => {
-      const { originalUrl } = request.body;
-      const link = await createShortUrl(originalUrl);
+      var { originalUrl, isEncrypted } = request.body;
+
+      let storedUrl = originalUrl;
+      let iv;
+
+      if (isEncrypted) {
+        const encrypted = Encrypt(originalUrl);
+        storedUrl = encrypted.content;
+        iv = encrypted.iv;
+      }
+
+      const link = await createShortUrl(storedUrl, iv, isEncrypted);
 
       reply
         .status(201)
