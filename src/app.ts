@@ -10,6 +10,7 @@ import {
 } from "fastify-type-provider-zod";
 import { ShortenRoute } from "./routes/shorten";
 import { RedirectRoute } from "./routes/redirect";
+import { analyticsRoutes } from "./routes/analytics";
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -30,8 +31,9 @@ app.register(fastifySwagger, {
 });
 
 app.register(fastifySwaggerUi, {
-  routePrefix: "/dosc",
+  routePrefix: "/docs",
 });
 
 app.register(ShortenRoute);
 app.register(RedirectRoute);
+app.register(analyticsRoutes);
