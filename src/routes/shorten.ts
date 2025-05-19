@@ -2,6 +2,7 @@ import z from "zod";
 import { createShortUrl } from "../services/url.service";
 import { FastifyTypeInstance } from "../types";
 import { Encrypt } from "../services/encryption.service";
+import { incrementConversion } from "../services/analytics.service";
 
 export async function ShortenRoute(app: FastifyTypeInstance) {
   app.post(
@@ -29,6 +30,7 @@ export async function ShortenRoute(app: FastifyTypeInstance) {
       }
 
       const link = await createShortUrl(storedUrl, iv, isEncrypted);
+      incrementConversion("/");
 
       reply
         .status(201)
