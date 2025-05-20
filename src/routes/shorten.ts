@@ -34,7 +34,7 @@ export async function ShortenRoute(app: FastifyTypeInstance) {
 
       reply
         .status(201)
-        .send({ shortUrl: `${process.env.SERVER_URL}/${link.code}` });
+        .send({ shortUrl: `${process.env.FRONTEND_URL}/${link.code}` });
     }
   );
 }
