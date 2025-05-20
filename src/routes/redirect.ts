@@ -11,7 +11,7 @@ export async function RedirectRoute(app: FastifyInstance) {
         tags: ["Link"],
       },
     },
-    async (request, reply) => { 
+    async (request, reply) => {
       const { code } = request.params as {
         code: string;
       };
